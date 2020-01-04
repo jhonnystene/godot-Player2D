@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://code/Player.gd" type="Script" id=1]
+[ext_resource path="res://animations/player-skin-1.tres" type="SpriteFrames" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 20 )
+
+[node name="Player2D" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 0.6 )
+shape = SubResource( 1 )
+
+[node name="Camera" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+
+[node name="AnimationManager" type="AnimatedSprite" parent="."]
+scale = Vector2( 1.053, 1.14 )
+frames = ExtResource( 2 )
+animation = "in_air"
+playing = true
+
+[node name="FloorDetection" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="FloorDetectionRight" type="RayCast2D" parent="FloorDetection"]
+position = Vector2( 5, 0 )
+enabled = true
+cast_to = Vector2( 0, 21 )
+
+[node name="FloorDetectionLeft" type="RayCast2D" parent="FloorDetection"]
+position = Vector2( -5, 0 )
+enabled = true
+cast_to = Vector2( 0, 21 )
